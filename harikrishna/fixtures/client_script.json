@@ -1,0 +1,145 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 0,
+  "modified": "2024-09-14 17:36:50.056455",
+  "module": null,
+  "name": "Fetch Field",
+  "script": "frappe.ui.form.on('Sales Invoice', {\n\tparty(frm) {\n\t    cur_frm.add_fetch('party', 'custom_parent_customer_group', 'custom_parent_customer_group');\n\t\t// your code here\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Quotation",
+  "enabled": 1,
+  "modified": "2024-09-14 17:43:35.298269",
+  "module": null,
+  "name": "Fetch Details",
+  "script": "frappe.ui.form.on('Quotation', {\n\tparty_name(frm) {\n\t    cur_frm.add_fetch('party_name', 'custom_parent_customer', 'custom_parent_customer_group');\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Item",
+  "enabled": 1,
+  "modified": "2024-09-14 18:18:11.642518",
+  "module": null,
+  "name": "Hide Button From Item",
+  "script": "frappe.ui.form.on('Item', {\n\trefresh(frm) {\n    \t\tfrm.remove_custom_button('Add / Edit Prices', 'Actions');\n\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Customer",
+  "enabled": 1,
+  "modified": "2024-09-14 18:13:41.801476",
+  "module": null,
+  "name": "Hide Button From Customer",
+  "script": "frappe.ui.form.on('Customer', {\n\trefresh(frm) {\n\t    cur_frm.clear_custom_buttons();\n\t\t// your code here\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Lead",
+  "enabled": 1,
+  "modified": "2024-09-14 18:18:56.003079",
+  "module": null,
+  "name": "Hide Custom Button From Lead",
+  "script": "frappe.ui.form.on('Lead', {\n\trefresh(frm) {\n\t    setTimeout(() => {\n\t\tfrm.remove_custom_button('Opportunity', 'Create');\n\t\tfrm.remove_custom_button('Prospect', 'Create');\n\t\tfrm.remove_custom_button('Add to Prospect', 'Action');\n\t    },100)\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Order",
+  "enabled": 1,
+  "modified": "2024-09-14 18:24:27.136025",
+  "module": null,
+  "name": "Hide Button From Sales Order",
+  "script": "frappe.ui.form.on('Sales Order', {\n\trefresh(frm) {\n\t\t// your code here\n\t\tsetTimeout(() => {\n    \t\tfrm.remove_custom_button('Pick List', 'Create');\n    \t\tfrm.remove_custom_button('Material Request', 'Create');\n    \t\tfrm.remove_custom_button('Request for Raw Materials', 'Create');\n    \t\tfrm.remove_custom_button('Purchase Order', 'Create');\n    \t\tfrm.remove_custom_button('Project', 'Create');\n    \t\tfrm.remove_custom_button('Payment Request', 'Create');\n\t    },100)\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2024-09-14 18:33:07.521608",
+  "module": null,
+  "name": "Hide Button From Sales Invoice",
+  "script": "frappe.ui.form.on('Sales Invoice', {\n\trefresh(frm) {\n\t\t// your code here\n\t\tsetTimeout(() => {\n\t\t    frm.remove_custom_button('Fetch Timesheet')\n\t\t    frm.remove_custom_button('Accounting Ledger', 'View');\n\t\t    frm.remove_custom_button('Accounting Ledger', 'Preview');\n\t\t    frm.remove_custom_button('UnReconcile', 'Actions');\n\t\t    frm.remove_custom_button('Delivery Note', 'Get Items From');\n    \t\tfrm.remove_custom_button('Delivery', 'Create');\n    \t\tfrm.remove_custom_button('Quality Inspection(s)', 'Create');\n    \t\tfrm.remove_custom_button('Return / Credit Note', 'Create');\n    \t\tfrm.remove_custom_button('Invoice Discounting', 'Create');\n    \t\tfrm.remove_custom_button('Dunning', 'Create');\n    \t\tfrm.remove_custom_button('Maintenance Schedule', 'Create');\n    \t\tfrm.remove_custom_button('Payment Request', 'Create');\n\t    },130)\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Payment Entry",
+  "enabled": 1,
+  "modified": "2024-09-14 18:31:33.498495",
+  "module": null,
+  "name": "Hide Button From Payment Entry",
+  "script": "frappe.ui.form.on('Payment Entry', {\n\trefresh(frm) {\n\t   frm.remove_custom_button('Ledger')\n\t   frm.remove_custom_button('UnReconcile', 'Actions');\n\t\t// your code here\n\t}\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Quotation",
+  "enabled": 1,
+  "modified": "2024-09-16 11:49:34.543076",
+  "module": null,
+  "name": "Set Naming Series Option in Quotation",
+  "script": "frappe.ui.form.on('Quotation', {\n    company: function(frm) {\n        if (frm.doc.company) {\n            // Fetch the Naming Series from the child table of the Single Doctype\n            frappe.call({\n                method: \"frappe.client.get\",\n                args: {\n                    doctype: \"Document Series by Company\",  // Single Doctype\n                },\n                callback: function(r) {\n                    if (r.message) {\n                       \n                        let naming_series_found = false;\n                        \n                        // Loop through the child table (Document Series Detail)\n                        $.each(r.message.table_slwv || [], function(index, row) {\n                            if (row.company === frm.doc.company && row.doctype_name === frm.doc.doctype) {\n                                 console.log(\"Found matching series:\", row);\n                                 \n                                // Split the naming series options into an array\n                                let options = row.naming_series.split(\"\\n\");\n\n                                // Update the naming_series field with the available options\n                                frm.set_df_property('naming_series', 'options', options.join(\"\\n\"));\n\n                                // Set the default value to the first option (optional)\n                                frm.set_value('naming_series', options[0]);\n                                \n                                naming_series_found = true;\n                                return false;  // Break the loop once the series is found\n                            }\n                        });\n\n                        // If no naming series found, show default naming series\n                        if (!naming_series_found) {\n                          \n                            // Fetch and restore default naming series from meta\n                            let default_options = frm.meta.fields.find(field => field.fieldname === 'naming_series').options;\n\n                            // Set the default naming series options\n                            frm.set_df_property('naming_series', 'options', default_options);\n                           \n                            // Set default value to the first option in the default naming series\n                            let default_series = default_options.split(\"\\n\")[0];\n                            frm.set_value('naming_series', default_series);\n                        }\n                    }\n                }\n            });\n        }\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Document Series by Company",
+  "enabled": 1,
+  "modified": "2024-09-16 11:43:15.970930",
+  "module": null,
+  "name": "Validation",
+  "script": "frappe.ui.form.on('Document Series by Company', {\n\trefresh(frm) {\n\t\t// your code here\n\t}\n})\n\nfrappe.ui.form.on('Naming Series Table', {\n    doctype_name: function(frm, cdt, cdn) {\n       let current_row = locals[cdt][cdn];\n        let combinations = new Set();\n        let duplicate_found = false;\n\n        frm.doc.table_slwv.forEach(function(row) {\n            let key = row.company + '|' + row.doctype_name;\n\n            // Check for duplicates in existing rows\n            if (key === (current_row.company + '|' + current_row.doctype_name) && row.name !== current_row.name) {\n                duplicate_found = true;\n                frappe.msgprint(__('A row with this Company and Doctype already exists.'));\n                frm.get_field('table_slwv').grid.grid_rows.filter(row => row.doc.name === current_row.name)[0].remove(); // Remove the current row\n                return false;  // Exit the loop\n            }\n\n            combinations.add(key);\n        });\n\n        if (duplicate_found) {\n            frappe.validated = false;  // Prevent adding the new row\n        }\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2024-09-16 11:47:19.075987",
+  "module": null,
+  "name": "Set Naming Series Option in Sales Invoice",
+  "script": "frappe.ui.form.on('Sales Invoice', {\n\tcompany: function(frm) {\n        if (frm.doc.company) {\n            // Fetch the Naming Series from the child table of the Single Doctype\n            frappe.call({\n                method: \"frappe.client.get\",\n                args: {\n                    doctype: \"Document Series by Company\",  // Single Doctype\n                },\n                callback: function(r) {\n                    if (r.message) {\n                       \n                        let naming_series_found = false;\n                        \n                        // Loop through the child table (Document Series Detail)\n                        $.each(r.message.table_slwv || [], function(index, row) {\n                            if (row.company === frm.doc.company && row.doctype_name === frm.doc.doctype) {\n                                 console.log(\"Found matching series:\", row);\n                                 \n                                // Split the naming series options into an array\n                                let options = row.naming_series.split(\"\\n\");\n\n                                // Update the naming_series field with the available options\n                                frm.set_df_property('naming_series', 'options', options.join(\"\\n\"));\n\n                                // Set the default value to the first option (optional)\n                                // frm.set_value('naming_series', options[0]);\n                                \n                                naming_series_found = true;\n                                return false;  // Break the loop once the series is found\n                            }\n                        });\n\n                        // If no naming series found, show default naming series\n                        if (!naming_series_found) {\n                          \n                            // Fetch and restore default naming series from meta\n                            let default_options = frm.meta.fields.find(field => field.fieldname === 'naming_series').options;\n\n                            // Set the default naming series options\n                            frm.set_df_property('naming_series', 'options', default_options);\n                           \n                            // Set default value to the first option in the default naming series\n                            let default_series = default_options.split(\"\\n\")[0];\n                            frm.set_value('naming_series', default_series);\n                        }\n                    }\n                }\n            });\n        }\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Order",
+  "enabled": 1,
+  "modified": "2024-09-16 11:49:56.497008",
+  "module": null,
+  "name": "Set Naming Series Option in Sales Order",
+  "script": "frappe.ui.form.on('Sales Order', {\n\tcompany: function(frm) {\n        if (frm.doc.company) {\n            // Fetch the Naming Series from the child table of the Single Doctype\n            frappe.call({\n                method: \"frappe.client.get\",\n                args: {\n                    doctype: \"Document Series by Company\",  // Single Doctype\n                },\n                callback: function(r) {\n                    if (r.message) {\n                       \n                        let naming_series_found = false;\n                        \n                        // Loop through the child table (Document Series Detail)\n                        $.each(r.message.table_slwv || [], function(index, row) {\n                            if (row.company === frm.doc.company && row.doctype_name === frm.doc.doctype) {\n                                 console.log(\"Found matching series:\", row);\n                                 \n                                // Split the naming series options into an array\n                                let options = row.naming_series.split(\"\\n\");\n\n                                // Update the naming_series field with the available options\n                                frm.set_df_property('naming_series', 'options', options.join(\"\\n\"));\n\n                                // Set the default value to the first option (optional)\n                                frm.set_value('naming_series', options[0]);\n                                \n                                naming_series_found = true;\n                                return false;  // Break the loop once the series is found\n                            }\n                        });\n\n                        // If no naming series found, show default naming series\n                        if (!naming_series_found) {\n                          \n                            // Fetch and restore default naming series from meta\n                            let default_options = frm.meta.fields.find(field => field.fieldname === 'naming_series').options;\n\n                            // Set the default naming series options\n                            frm.set_df_property('naming_series', 'options', default_options);\n                           \n                            // Set default value to the first option in the default naming series\n                            let default_series = default_options.split(\"\\n\")[0];\n                            frm.set_value('naming_series', default_series);\n                        }\n                    }\n                }\n            });\n        }\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Company",
+  "enabled": 1,
+  "modified": "2024-09-16 15:46:34.930214",
+  "module": null,
+  "name": "Hide Button From Company",
+  "script": "frappe.ui.form.on('Company', {\n\trefresh(frm) {\n\t    if(frappe.session.user !== \"Administrator\"){\n\t        setTimeout(() => {\n    \t\tfrm.remove_custom_button('Cost Centers', 'View');\n    \t\tfrm.remove_custom_button('Chart of Accounts', 'View');\n    \t\tfrm.remove_custom_button('Sales Tax Template', 'View');\n    \t\tfrm.remove_custom_button('Purchase Tax Template', 'View');\n    \t\tfrm.remove_custom_button('Create Tax Template', 'Manage');\n    \t\tfrm.remove_custom_button('Delete Transactions', 'Manage');\n\t    },100)\n\t    }\n\t\t// your code here\n\t}\n})",
+  "view": "Form"
+ }
+]

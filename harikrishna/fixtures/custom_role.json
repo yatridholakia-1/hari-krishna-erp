@@ -1,0 +1,96 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Custom Role",
+  "modified": "2024-09-16 17:04:50.649224",
+  "name": "1rkassml64",
+  "page": null,
+  "ref_doctype": "Sales Invoice",
+  "report": "Customer Payment Statement",
+  "roles": [
+   {
+    "parent": "1rkassml64",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "1rkassml64",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "1rkassml64",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Admin"
+   },
+   {
+    "parent": "1rkassml64",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Sub Admin"
+   },
+   {
+    "parent": "1rkassml64",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Sales"
+   },
+   {
+    "parent": "1rkassml64",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "System Manager"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Custom Role",
+  "modified": "2024-09-16 17:05:17.984590",
+  "name": "1rsrjufo9r",
+  "page": null,
+  "ref_doctype": "Sales Invoice",
+  "report": "Payment Due Report",
+  "roles": [
+   {
+    "parent": "1rsrjufo9r",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "1rsrjufo9r",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "1rsrjufo9r",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Admin"
+   },
+   {
+    "parent": "1rsrjufo9r",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Sales"
+   },
+   {
+    "parent": "1rsrjufo9r",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Sub Admin"
+   },
+   {
+    "parent": "1rsrjufo9r",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "System Manager"
+   }
+  ]
+ }
+]

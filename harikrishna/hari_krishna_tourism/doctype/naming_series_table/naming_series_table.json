@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-09-16 10:30:47.578878",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "doctype_name",
+  "naming_series"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "doctype_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "DocType Name",
+   "link_filters": "[[\"DocType\",\"name\",\"in\",[\"Quotation\",\"Sales Order\",\"Sales Invoice\"]]]",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Naming Series"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-09-16 10:33:37.200014",
+ "modified_by": "Administrator",
+ "module": "Hari Krishna Tourism",
+ "name": "Naming Series Table",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
