@@ -1,7 +1,7 @@
 [
  {
   "charts": [],
-  "content": "[{\"id\":\"aCk49ShVRs\",\"type\":\"onboarding\",\"data\":{\"onboarding_name\":\"Home\",\"col\":12}},{\"id\":\"kb3XPLg8lb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"nWd2KJPW8l\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":3}},{\"id\":\"snrzfbFr5Y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"SHJKakmLLf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":3}},{\"id\":\"CPxEyhaf3G\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"WU4F-HUcIQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Leaderboard\",\"col\":3}},{\"id\":\"d_KVM1gsf9\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"JVu8-FJZCu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"id\":\"JiuSi0ubOg\",\"type\":\"card\",\"data\":{\"card_name\":\"Accounting\",\"col\":4}},{\"id\":\"ji2Jlm3Q8i\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock\",\"col\":4}},{\"id\":\"N61oiXpuwK\",\"type\":\"card\",\"data\":{\"card_name\":\"CRM\",\"col\":4}},{\"id\":\"6J0CVl1mPo\",\"type\":\"card\",\"data\":{\"card_name\":\"Data Import and Settings\",\"col\":4}}]",
+  "content": "[{\"id\":\"kb3XPLg8lb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"nWd2KJPW8l\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item\",\"col\":3}},{\"id\":\"snrzfbFr5Y\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer\",\"col\":3}},{\"id\":\"SHJKakmLLf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":3}},{\"id\":\"CPxEyhaf3G\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"WU4F-HUcIQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Leaderboard\",\"col\":3}},{\"id\":\"d_KVM1gsf9\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"JVu8-FJZCu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"id\":\"JiuSi0ubOg\",\"type\":\"card\",\"data\":{\"card_name\":\"Accounting\",\"col\":4}},{\"id\":\"ji2Jlm3Q8i\",\"type\":\"card\",\"data\":{\"card_name\":\"Stock\",\"col\":4}},{\"id\":\"N61oiXpuwK\",\"type\":\"card\",\"data\":{\"card_name\":\"CRM\",\"col\":4}},{\"id\":\"6J0CVl1mPo\",\"type\":\"card\",\"data\":{\"card_name\":\"Data Import and Settings\",\"col\":4}}]",
   "custom_blocks": [],
   "docstatus": 0,
   "doctype": "Workspace",
@@ -391,7 +391,7 @@
     "type": "Link"
    }
   ],
-  "modified": "2024-09-17 16:41:46.066356",
+  "modified": "2024-09-20 10:49:20.843007",
   "module": "Setup",
   "name": "Home",
   "number_cards": [],
@@ -13411,7 +13411,7 @@
  },
  {
   "charts": [],
-  "content": "[{\"id\":\"4mSw6eQtRv\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">HK Tourism</span>\",\"col\":12}},{\"id\":\"24e8f7eBBq\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"NKYTUm2z5x\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales\",\"col\":4}},{\"id\":\"6K_HcwvW_0\",\"type\":\"card\",\"data\":{\"card_name\":\"CRM\",\"col\":4}},{\"id\":\"XRa7-nCQYw\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"l55hjNntgF\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"ySpvcmpcUw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Due Report\",\"col\":3}},{\"id\":\"IvEB9mT4j2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer Payment Statement\",\"col\":3}}]",
+  "content": "[{\"id\":\"4mSw6eQtRv\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">HK Tourism</span>\",\"col\":12}},{\"id\":\"24e8f7eBBq\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"6K_HcwvW_0\",\"type\":\"card\",\"data\":{\"card_name\":\"CRM\",\"col\":4}},{\"id\":\"NKYTUm2z5x\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales\",\"col\":4}},{\"id\":\"XRa7-nCQYw\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"l55hjNntgF\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"ySpvcmpcUw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Due Report\",\"col\":3}},{\"id\":\"IvEB9mT4j2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer Payment Statement\",\"col\":3}}]",
   "custom_blocks": [],
   "docstatus": 0,
   "doctype": "Workspace",
@@ -13621,7 +13621,7 @@
     "type": "Link"
    }
   ],
-  "modified": "2024-09-17 16:41:45.985403",
+  "modified": "2024-10-19 10:08:58.080967",
   "module": null,
   "name": "HK Tourism",
   "number_cards": [],
@@ -13669,40 +13669,6 @@
  },
  {
   "charts": [],
-  "content": "[{\"id\":\"2P7VCfqZEm\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">test</span>\",\"col\":12}},{\"id\":\"lSTqFaELmP\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"test 777\",\"col\":12}}]",
-  "custom_blocks": [
-   {
-    "custom_block_name": "test 777",
-    "label": "test 777",
-    "parent": "test",
-    "parentfield": "custom_blocks",
-    "parenttype": "Workspace"
-   }
-  ],
-  "docstatus": 0,
-  "doctype": "Workspace",
-  "for_user": "",
-  "hide_custom": 0,
-  "icon": null,
-  "indicator_color": "green",
-  "is_hidden": 0,
-  "label": "test",
-  "links": [],
-  "modified": "2024-09-17 16:41:47.498038",
-  "module": null,
-  "name": "test",
-  "number_cards": [],
-  "parent_page": "",
-  "public": 1,
-  "quick_lists": [],
-  "restrict_to_domain": null,
-  "roles": [],
-  "sequence_id": 25.0,
-  "shortcuts": [],
-  "title": "test"
- },
- {
-  "charts": [],
   "content": "[{\"id\":\"b4oWRSvPzZ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Report</span>\",\"col\":12}},{\"id\":\"fuxpc_XTe2\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"testtt 11\",\"col\":12}}]",
   "custom_blocks": [
    {
@@ -13719,10 +13685,10 @@
   "hide_custom": 0,
   "icon": "list-alt",
   "indicator_color": "green",
-  "is_hidden": 0,
+  "is_hidden": 1,
   "label": "HK Report",
   "links": [],
-  "modified": "2024-09-17 16:42:26.768753",
+  "modified": "2024-09-20 10:49:43.807500",
   "module": null,
   "name": "HK Report",
   "number_cards": [],

@@ -92,5 +92,87 @@
     "role": "System Manager"
    }
   ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Custom Role",
+  "modified": "2024-10-15 17:14:54.256082",
+  "name": "um8uh9r4si",
+  "page": null,
+  "ref_doctype": "Sales Invoice",
+  "report": "Payment Due Report 2",
+  "roles": [
+   {
+    "parent": "um8uh9r4si",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "um8uh9r4si",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "um8uh9r4si",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Sales"
+   },
+   {
+    "parent": "um8uh9r4si",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Sub Admin"
+   },
+   {
+    "parent": "um8uh9r4si",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Admin"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Custom Role",
+  "modified": "2024-10-15 17:15:14.386328",
+  "name": "umf7s9dv66",
+  "page": null,
+  "ref_doctype": "Sales Invoice",
+  "report": "Customer Payment Statement 2",
+  "roles": [
+   {
+    "parent": "umf7s9dv66",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "umf7s9dv66",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "umf7s9dv66",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Sales"
+   },
+   {
+    "parent": "umf7s9dv66",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Admin"
+   },
+   {
+    "parent": "umf7s9dv66",
+    "parentfield": "roles",
+    "parenttype": "Custom Role",
+    "role": "HK-Sub Admin"
+   }
+  ]
  }
 ]

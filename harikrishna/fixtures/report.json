@@ -8256,80 +8256,6 @@
   "timeout": 0
  },
  {
-  "add_total_row": 1,
-  "columns": [],
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Report",
-  "filters": [],
-  "is_standard": "No",
-  "javascript": "frappe.query_reports[\"Payment Due Report\"] = {\n    \"filters\": [\n    \n        {\n            \"fieldname\": \"company\",\n            \"label\": __(\"Company\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Company\"\n        },\n         {\n            \"fieldname\": \"customer\",\n            \"label\": __(\"Customer\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Customer\"\n        },\n        {\n            \"fieldname\": \"status\",\n            \"label\": __(\"Status\"),\n            \"fieldtype\": \"Select\",\n            \"options\": \"\\nUnpaid\\nPartly Paid\"\n        },\n        {\n            \"fieldname\": \"group_by_customer\",\n            \"label\": __(\"Group By Customer\"),\n            \"fieldtype\": \"Check\"\n        }\n    ]\n};\n",
-  "json": null,
-  "letter_head": null,
-  "modified": "2024-09-16 13:04:00.067093",
-  "module": "Hari Krishna Tourism",
-  "name": "Payment Due Report",
-  "prepared_report": 0,
-  "query": null,
-  "ref_doctype": "Sales Invoice",
-  "reference_report": null,
-  "report_name": "Payment Due Report",
-  "report_script": "columns = [\n    {\n        \"label\": _(\"Customer Name\"),\n        \"fieldname\": \"customer\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Customer\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Status\"),\n        \"fieldname\": \"status\",\n        \"fieldtype\": \"Data\",\n        \"width\": 100\n    },\n    {\n        \"label\": _(\"Outstanding Amount\"),\n        \"fieldname\": \"outstanding_amount\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Grand Total\"),\n        \"fieldname\": \"base_grand_total\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Company\"),\n        \"fieldname\": \"company\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Company\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Link\"),\n        \"fieldname\": \"name\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Invoice\",\n        \"width\": 250\n    }\n]\n\ndata = []\n\nfilters = filters or {}\n\n# Initialize query filters to fetch Sales Invoices\nquery_filters = {\n    'docstatus': 1,  # Ensure the document is submitted\n    'outstanding_amount': [\">\", 0]  # Only include invoices with an outstanding amount\n}\n\n# Apply additional filters based on user input\nif filters.get('company'):\n    query_filters['company'] = filters.get('company')\n\nif filters.get('customer'):\n    query_filters['customer'] = filters.get('customer')\n\nif filters.get('status'):\n    query_filters['status'] = filters.get('status')\n\n# Fetch invoices based on the query filters\ninvoices = frappe.get_all('Sales Invoice', filters=query_filters, fields=['customer', 'status', 'outstanding_amount', 'base_grand_total', 'name', 'company'])\n\n# Append invoice data to the result set\nfor invoice in invoices:\n    data.append({\n        'company': invoice['company'],\n        'customer': invoice['customer'],\n        'status': invoice['status'],  # Use payment_status here\n        'outstanding_amount': float(invoice['outstanding_amount']),\n        'base_grand_total': invoice['base_grand_total'],\n        'name': invoice['name']\n    })\n\n# Check if the user wants to group the results by customer\nif filters.get('group_by_customer'):\n    grouped_data = {}\n    for row in data:\n        customer = row['customer']\n        company = row['company']\n        key = (customer, company)  # Create a unique key for grouping\n\n        if key not in grouped_data:\n            grouped_data[key] = {\n                'company': company,\n                'customer': customer,\n                'outstanding_amount': 0,\n                'base_grand_total': 0\n            }\n        \n        # Use explicit assignment to update grouped data\n        grouped_data[key]['outstanding_amount'] = grouped_data[key]['outstanding_amount'] + row['outstanding_amount']\n        grouped_data[key]['base_grand_total'] = grouped_data[key]['base_grand_total'] + row['base_grand_total']\n\n    # Prepare final data for grouped report\n    final_data = []\n    for key, values in grouped_data.items():\n        final_data.append({\n            'customer': values['customer'],\n            'status': 'Grouped',  # Status for grouped rows\n            'outstanding_amount': values['outstanding_amount'],\n            'base_grand_total': values['base_grand_total'],\n            'company': values['company'],\n            'name': ''  # No specific invoice link for grouped data\n        })\n\n    data = final_data\n\ndata = columns, data",
-  "report_type": "Script Report",
-  "roles": [
-   {
-    "parent": "Payment Due Report",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Accounts Manager"
-   },
-   {
-    "parent": "Payment Due Report",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Accounts User"
-   }
-  ],
-  "timeout": 0
- },
- {
-  "add_total_row": 1,
-  "columns": [],
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Report",
-  "filters": [],
-  "is_standard": "No",
-  "javascript": "frappe.query_reports[\"Customer Payment Statement\"] = {\n    \"filters\": [\n    \n        {\n            \"fieldname\": \"company\",\n            \"label\": __(\"Company\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Company\"\n        },\n         {\n            \"fieldname\": \"customer\",\n            \"label\": __(\"Customer\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Customer\"\n        },\n        {\n            \"fieldname\": \"status\",\n            \"label\": __(\"Status\"),\n            \"fieldtype\": \"Select\",\n            \"options\": \"\\nPaid\\nUnpaid\\nPartly Paid\"\n        },\n        {\n            \"fieldname\": \"group_by_customer\",\n            \"label\": __(\"Group By Customer\"),\n            \"fieldtype\": \"Check\"\n        }\n    ]\n};\n",
-  "json": null,
-  "letter_head": null,
-  "modified": "2024-09-16 14:33:31.108692",
-  "module": "Hari Krishna Tourism",
-  "name": "Customer Payment Statement",
-  "prepared_report": 0,
-  "query": null,
-  "ref_doctype": "Sales Invoice",
-  "reference_report": null,
-  "report_name": "Customer Payment Statement",
-  "report_script": "columns = [\n    {\n        \"label\": _(\"Customer Name\"),\n        \"fieldname\": \"customer\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Customer\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Status\"),\n        \"fieldname\": \"status\",\n        \"fieldtype\": \"Data\",\n        \"width\": 100\n    },\n    {\n        \"label\": _(\"Advance Paid\"),\n        \"fieldname\": \"total_advance\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Outstanding Amount\"),\n        \"fieldname\": \"outstanding_amount\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Grand Total\"),\n        \"fieldname\": \"base_grand_total\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Company\"),\n        \"fieldname\": \"company\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Company\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Link\"),\n        \"fieldname\": \"name\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Invoice\",\n        \"width\": 250\n    }\n]\n\ndata = []\n\nfilters = filters or {}\n\n# Initialize query filters to fetch Sales Invoices\nquery_filters = {\n    'docstatus': 1, \n}\n\n# Apply additional filters based on user input\nif filters.get('company'):\n    query_filters['company'] = filters.get('company')\n\nif filters.get('customer'):\n    query_filters['customer'] = filters.get('customer')\n\nif filters.get('status'):\n    query_filters['status'] = filters.get('status')\n\n# Fetch invoices based on the query filters\ninvoices = frappe.get_all('Sales Invoice', filters=query_filters, fields=['customer', 'total_advance', 'status', 'outstanding_amount', 'base_grand_total', 'name', 'company'])\n\n# Append invoice data to the result set\nfor invoice in invoices:\n    data.append({\n        'company': invoice['company'],\n        'customer': invoice['customer'],\n        'status': invoice['status'],  # Use payment_status here\n        'total_advance': invoice['total_advance'],\n        'outstanding_amount': float(invoice['outstanding_amount']),\n        'base_grand_total': invoice['base_grand_total'],\n        'name': invoice['name']\n    })\n\n# Check if the user wants to group the results by customer\nif filters.get('group_by_customer'):\n    grouped_data = {}\n    for row in data:\n        customer = row['customer']\n        company = row['company']\n        key = (customer, company)  # Create a unique key for grouping\n\n        if key not in grouped_data:\n            grouped_data[key] = {\n                'company': company,\n                'customer': customer,\n                'outstanding_amount': 0,\n                'base_grand_total': 0,\n                'total_advance': 0\n            }\n        \n        # Use explicit assignment to update grouped data\n        grouped_data[key]['outstanding_amount'] = grouped_data[key]['outstanding_amount'] + row['outstanding_amount']\n        grouped_data[key]['base_grand_total'] = grouped_data[key]['base_grand_total'] + row['base_grand_total']\n        grouped_data[key]['total_advance'] = grouped_data[key]['total_advance'] + row['total_advance']\n\n    # Prepare final data for grouped report\n    final_data = []\n    for key, values in grouped_data.items():\n        final_data.append({\n            'customer': values['customer'],\n            'status': 'Grouped',  # Status for grouped rows\n            'total_advance': values['total_advance'],\n            'outstanding_amount': values['outstanding_amount'],\n            'base_grand_total': values['base_grand_total'],\n            'company': values['company'],\n            'name': ''  # No specific invoice link for grouped data\n        })\n\n    data = final_data\n\ndata = columns, data",
-  "report_type": "Script Report",
-  "roles": [
-   {
-    "parent": "Customer Payment Statement",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Accounts Manager"
-   },
-   {
-    "parent": "Customer Payment Statement",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Accounts User"
-   }
-  ],
-  "timeout": 0
- },
- {
   "add_total_row": 0,
   "columns": [],
   "disabled": 0,
@@ -8439,6 +8365,154 @@
   "roles": [
    {
     "parent": "Asset Depreciation Ledger",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": "frappe.query_reports[\"Payment Due Report\"] = {\n\"filters\": [\n    \n        {\n            \"fieldname\": \"company\",\n            \"label\": __(\"Company\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Company\"\n        },\n         {\n            \"fieldname\": \"customer\",\n            \"label\": __(\"Customer\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Customer\"\n        },\n        {\n            \"fieldname\": \"status\",\n            \"label\": __(\"Status\"),\n            \"fieldtype\": \"Select\",\n            \"options\": \"\\nUnpaid\\nPartly Paid\\nNot Invoiced\\nOverdue\"\n        },\n        {\n            \"fieldname\": \"group_by_customer\",\n            \"label\": __(\"Group By Customer\"),\n            \"fieldtype\": \"Check\"\n        }\n    ]\n};\n\n",
+  "json": null,
+  "letter_head": null,
+  "modified": "2024-10-19 10:06:26.532705",
+  "module": "Hari Krishna Tourism",
+  "name": "Payment Due Report",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Payment Due Report",
+  "report_script": "columns = [\n    {\n        \"label\": _(\"Customer Name\"),\n        \"fieldname\": \"customer\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Customer\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Status\"),\n        \"fieldname\": \"status\",\n        \"fieldtype\": \"Data\",\n        \"width\": 100\n    },\n       \n    {\n        \"label\": _(\"Outstanding Amount\"),\n        \"fieldname\": \"outstanding_amount\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Grand Total\"),\n        \"fieldname\": \"base_grand_total\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n\n    {\n        \"label\": _(\"Company\"),\n        \"fieldname\": \"company\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Company\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Sales Order Link\"),\n        \"fieldname\": \"sales_order\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Order\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Sales Invoice Link\"),\n        \"fieldname\": \"sales_invoice\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Invoice\",\n        \"width\": 150\n    }\n]\n\ndata = []\n\nfilters = filters or {}\n\n# Initialize query filters for submitted Sales Orders and Invoices\nquery_conditions = ['so.docstatus = 1']  # Only include submitted Sales Orders\nquery_values = []\n\n# Apply additional filters based on user input\nif filters.get('company'):\n    query_conditions.append('so.company = %s')\n    query_values.append(filters.get('company'))\n\nif filters.get('customer'):\n    query_conditions.append('so.customer = %s')\n    query_values.append(filters.get('customer'))\n\n# Convert the list of conditions into a single string for the SQL query\nwhere_clause = ' AND '.join(query_conditions)\n\n# Fetch submitted Sales Orders and their related Sales Invoices\nsales_orders = frappe.db.sql(f\"\"\"\n    SELECT \n        so.name AS sales_order,\n        so.customer, \n        so.company,\n        si.name AS sales_invoice,\n        si.status, \n        si.outstanding_amount, \n        si.base_grand_total,\n        so.grand_total,\n        si.total_advance AS invoice_advance,  -- Fetch advance from Sales Invoice\n        so.advance_paid AS order_advance  -- Fetch advance from Sales Order\n        \n    FROM \n        `tabSales Order` so\n    LEFT JOIN \n        `tabSales Invoice Item` sii ON so.name = sii.sales_order\n    LEFT JOIN \n        `tabSales Invoice` si ON sii.parent = si.name AND si.docstatus = 1 AND si.outstanding_amount > 0  -- Only include submitted invoices\n    WHERE \n        {where_clause}\n    ORDER BY \n        so.name\n\"\"\", query_values, as_dict=True)\n\n# Append sales order and invoice data to the result set\nfor entry in sales_orders:\n    # Safely handle None values\n    \n    amount_grand_total = float(entry.get('grand_total', 0) or 0)  # Default to 0 if None\n    total_advance = float(entry.get('invoice_advance', 0) or 0) if entry.get('sales_invoice') else float(entry.get('order_advance', 0) or 0)  \n    amount_outstanding =  amount_grand_total- total_advance\n    status = entry['status'] if entry['sales_invoice'] else 'Not Invoiced'  # Status logic\n    \n    if filters.get('status') and filters.get('status') != status:\n        continue\n    \n        \n    data.append({\n        'customer': entry['customer'],\n        'sales_order': entry['sales_order'],\n        'sales_invoice': entry['sales_invoice'] if entry['sales_invoice'] else 'Not Invoiced',\n        'status': status,\n        'outstanding_amount': amount_outstanding,\n        'base_grand_total': amount_grand_total,\n        'company': entry['company']\n    })\n\n# Check if the user wants to group the results by customer\nif filters.get('group_by_customer'):\n    columns = [col for col in columns if col['fieldname'] not in ['sales_order', 'sales_invoice']]\n    grouped_data = {}\n    for row in data:\n        customer = row['customer']\n        company = row['company']\n        key = (customer, company)  # Create a unique key for grouping\n\n        if key not in grouped_data:\n            grouped_data[key] = {\n                'company': company,\n                'customer': customer,\n                'outstanding_amount': 0,\n                'base_grand_total': 0,\n                'total_advance': 0  # Initialize advance paid for grouping\n            }\n        \n        # Aggregate values\n        grouped_data[key]['outstanding_amount'] = grouped_data[key]['outstanding_amount'] + row['outstanding_amount']\n        grouped_data[key]['base_grand_total'] = grouped_data[key]['base_grand_total'] + row['base_grand_total']\n\n    # Prepare final data for grouped report\n    final_data = []\n    for key, values in grouped_data.items():\n        final_data.append({\n            'customer': values['customer'],\n            'status': 'Grouped',  # Status for grouped rows\n            'outstanding_amount': values['outstanding_amount'],\n            'base_grand_total': values['base_grand_total'],\n            'company': values['company'],\n            'sales_order': '',  # No specific sales order for grouped data\n            'sales_invoice': ''  # No specific invoice for grouped data\n        })\n\n    data = final_data\n\n# Final data output for the report\ndata = columns, data\n",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Payment Due Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Payment Due Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": "frappe.query_reports[\"Customer Payment Statement\"] = {\n    \"filters\": [\n    \n        {\n            \"fieldname\": \"company\",\n            \"label\": __(\"Company\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Company\"\n        },\n         {\n            \"fieldname\": \"customer\",\n            \"label\": __(\"Customer\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Customer\"\n        },\n        {\n            \"fieldname\": \"status\",\n            \"label\": __(\"Status\"),\n            \"fieldtype\": \"Select\",\n            \"options\": \"\\nPaid\\nUnpaid\\nPartly Paid\\nNot Invoiced\\nOverdue\"\n        },\n        {\n            \"fieldname\": \"group_by_customer\",\n            \"label\": __(\"Group By Customer\"),\n            \"fieldtype\": \"Check\"\n        }\n    ]\n};\n",
+  "json": null,
+  "letter_head": null,
+  "modified": "2024-10-19 10:08:16.994802",
+  "module": "Hari Krishna Tourism",
+  "name": "Customer Payment Statement",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Customer Payment Statement",
+  "report_script": "columns = [\n    {\n        \"label\": _(\"Customer Name\"),\n        \"fieldname\": \"customer\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Customer\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Sales Order Link\"),\n        \"fieldname\": \"sales_order\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Order\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Sales Invoice Link\"),\n        \"fieldname\": \"sales_invoice\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Invoice\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Status\"),\n        \"fieldname\": \"status\",\n        \"fieldtype\": \"Data\",\n        \"width\": 100\n    },\n        {\n        \"label\": _(\"Advance Paid\"),\n        \"fieldname\": \"total_advance\",  # Ensure this matches the Sales Order field name\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Outstanding Amount\"),\n        \"fieldname\": \"outstanding_amount\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Grand Total\"),\n        \"fieldname\": \"base_grand_total\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n\n    {\n        \"label\": _(\"Company\"),\n        \"fieldname\": \"company\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Company\",\n        \"width\": 250\n    }\n]\n\ndata = []\n\nfilters = filters or {}\n\n# Initialize query filters for submitted Sales Orders and Invoices\nquery_conditions = ['so.docstatus = 1']  # Only include submitted Sales Orders\nquery_values = []\n\n# Apply additional filters based on user input\nif filters.get('company'):\n    query_conditions.append('so.company = %s')\n    query_values.append(filters.get('company'))\n\nif filters.get('customer'):\n    query_conditions.append('so.customer = %s')\n    query_values.append(filters.get('customer'))\n\n# Convert the list of conditions into a single string for the SQL query\nwhere_clause = ' AND '.join(query_conditions)\n\n# Fetch submitted Sales Orders and their related Sales Invoices\nsales_orders = frappe.db.sql(f\"\"\"\n    SELECT \n        so.name AS sales_order,\n        so.customer, \n        so.company,\n        si.name AS sales_invoice,\n        si.status, \n        si.outstanding_amount, \n        si.base_grand_total,\n        so.grand_total,\n        si.total_advance AS invoice_advance,  -- Fetch advance from Sales Invoice\n        so.advance_paid AS order_advance  -- Fetch advance from Sales Order\n        \n    FROM \n        `tabSales Order` so\n    LEFT JOIN \n        `tabSales Invoice Item` sii ON so.name = sii.sales_order\n    LEFT JOIN \n        `tabSales Invoice` si ON sii.parent = si.name AND si.docstatus = 1  -- Only include submitted invoices\n    WHERE \n        {where_clause}\n    ORDER BY \n        so.name\n\"\"\", query_values, as_dict=True)\n\n# Append sales order and invoice data to the result set\nfor entry in sales_orders:\n    # Safely handle None values\n    \n    \n    amount_grand_total = float(entry.get('grand_total', 0) or 0)  # Default to 0 if None\n    total_advance = float(entry.get('invoice_advance', 0) or 0) if entry.get('sales_invoice') else float(entry.get('order_advance', 0) or 0)  \n    amount_outstanding =  amount_grand_total- total_advance\n    status = entry['status'] if entry['sales_invoice'] else 'Not Invoiced' \n    \n    if filters.get('status') and filters.get('status') != status:\n        continue\n    \n    data.append({\n        'customer': entry['customer'],\n        'sales_order': entry['sales_order'],\n        'sales_invoice': entry['sales_invoice'] if entry['sales_invoice'] else 'Not Invoiced',\n        'status': status,\n        'outstanding_amount': amount_outstanding,\n        'base_grand_total': amount_grand_total,\n        'total_advance': total_advance,  # Use advance_paid from Sales Order\n        'company': entry['company']\n    })\n\n# Check if the user wants to group the results by customer\nif filters.get('group_by_customer'):\n    columns = [col for col in columns if col['fieldname'] not in ['sales_order', 'sales_invoice']]\n    grouped_data = {}\n    for row in data:\n        customer = row['customer']\n        company = row['company']\n        key = (customer, company)  # Create a unique key for grouping\n\n        if key not in grouped_data:\n            grouped_data[key] = {\n                'company': company,\n                'customer': customer,\n                'outstanding_amount': 0,\n                'base_grand_total': 0,\n                'total_advance': 0  # Initialize advance paid for grouping\n            }\n        \n        # Aggregate values\n        grouped_data[key]['outstanding_amount'] = grouped_data[key]['outstanding_amount'] + row['outstanding_amount']\n        grouped_data[key]['base_grand_total'] = grouped_data[key]['base_grand_total'] + row['base_grand_total']\n        grouped_data[key]['total_advance'] = grouped_data[key]['total_advance'] + row['total_advance']  # Aggregate total advance\n\n    # Prepare final data for grouped report\n    final_data = []\n    for key, values in grouped_data.items():\n        final_data.append({\n            'customer': values['customer'],\n            'status': 'Grouped',  # Status for grouped rows\n            'outstanding_amount': values['outstanding_amount'],\n            'base_grand_total': values['base_grand_total'],\n            'total_advance': values['total_advance'],  # Include total advance paid for grouped data\n            'company': values['company'],\n            'sales_order': '',  # No specific sales order for grouped data\n            'sales_invoice': ''  # No specific invoice for grouped data\n        })\n\n    data = final_data\n\n# Final data output for the report\ndata = columns, data\n",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Customer Payment Statement",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Customer Payment Statement",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": "frappe.query_reports[\"Customer Payment Statement 2\"] = {\n    \"filters\": [\n    \n        {\n            \"fieldname\": \"company\",\n            \"label\": __(\"Company\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Company\"\n        },\n         {\n            \"fieldname\": \"customer\",\n            \"label\": __(\"Customer\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Customer\"\n        },\n        {\n            \"fieldname\": \"status\",\n            \"label\": __(\"Status\"),\n            \"fieldtype\": \"Select\",\n            \"options\": \"\\nUnpaid\\nPartly Paid\\nNot Invoiced\\nOverdue\"\n        },\n        {\n            \"fieldname\": \"group_by_customer\",\n            \"label\": __(\"Group By Customer\"),\n            \"fieldtype\": \"Check\"\n        }\n    ]\n};\n",
+  "json": null,
+  "letter_head": "Shree Hari Krishna Tourism",
+  "modified": "2024-10-15 12:30:19.735060",
+  "module": "Hari Krishna Tourism",
+  "name": "Customer Payment Statement 2",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Customer Payment Statement 2",
+  "report_script": "columns = [\n    {\n        \"label\": _(\"Customer Name\"),\n        \"fieldname\": \"customer\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Customer\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Sales Order Link\"),\n        \"fieldname\": \"sales_order\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Order\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Sales Invoice Link\"),\n        \"fieldname\": \"sales_invoice\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Invoice\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Status\"),\n        \"fieldname\": \"status\",\n        \"fieldtype\": \"Data\",\n        \"width\": 100\n    },\n        {\n        \"label\": _(\"Advance Paid\"),\n        \"fieldname\": \"total_advance\",  # Ensure this matches the Sales Order field name\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Outstanding Amount\"),\n        \"fieldname\": \"outstanding_amount\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Grand Total\"),\n        \"fieldname\": \"base_grand_total\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n\n    {\n        \"label\": _(\"Company\"),\n        \"fieldname\": \"company\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Company\",\n        \"width\": 250\n    }\n]\n\ndata = []\n\nfilters = filters or {}\n\n# Initialize query filters for submitted Sales Orders and Invoices\nquery_conditions = ['so.docstatus = 1']  # Only include submitted Sales Orders\nquery_values = []\n\n# Apply additional filters based on user input\nif filters.get('company'):\n    query_conditions.append('so.company = %s')\n    query_values.append(filters.get('company'))\n\nif filters.get('customer'):\n    query_conditions.append('so.customer = %s')\n    query_values.append(filters.get('customer'))\n\n# Convert the list of conditions into a single string for the SQL query\nwhere_clause = ' AND '.join(query_conditions)\n\n# Fetch submitted Sales Orders and their related Sales Invoices\nsales_orders = frappe.db.sql(f\"\"\"\n    SELECT \n        so.name AS sales_order,\n        so.customer, \n        so.company,\n        si.name AS sales_invoice,\n        si.status, \n        si.outstanding_amount, \n        si.base_grand_total,\n        so.grand_total,\n        si.total_advance AS invoice_advance,  -- Fetch advance from Sales Invoice\n        so.advance_paid AS order_advance  -- Fetch advance from Sales Order\n        \n    FROM \n        `tabSales Order` so\n    LEFT JOIN \n        `tabSales Invoice Item` sii ON so.name = sii.sales_order\n    LEFT JOIN \n        `tabSales Invoice` si ON sii.parent = si.name AND si.docstatus = 1  -- Only include submitted invoices\n    WHERE \n        {where_clause}\n    ORDER BY \n        so.name\n\"\"\", query_values, as_dict=True)\n\n# Append sales order and invoice data to the result set\nfor entry in sales_orders:\n    # Safely handle None values\n    \n    \n    amount_grand_total = float(entry.get('grand_total', 0) or 0)  # Default to 0 if None\n    total_advance = float(entry.get('invoice_advance', 0) or 0) if entry.get('sales_invoice') else float(entry.get('order_advance', 0) or 0)  \n    amount_outstanding =  amount_grand_total- total_advance\n    status = entry['status'] if entry['sales_invoice'] else 'Not Invoiced' \n    \n    if filters.get('status') and filters.get('status') != status:\n        continue\n    \n    data.append({\n        'customer': entry['customer'],\n        'sales_order': entry['sales_order'],\n        'sales_invoice': entry['sales_invoice'] if entry['sales_invoice'] else 'Not Invoiced',\n        'status': status,\n        'outstanding_amount': amount_outstanding,\n        'base_grand_total': amount_grand_total,\n        'total_advance': total_advance,  # Use advance_paid from Sales Order\n        'company': entry['company']\n    })\n\n# Check if the user wants to group the results by customer\nif filters.get('group_by_customer'):\n    columns = [col for col in columns if col['fieldname'] not in ['sales_order', 'sales_invoice']]\n    grouped_data = {}\n    for row in data:\n        customer = row['customer']\n        company = row['company']\n        key = (customer, company)  # Create a unique key for grouping\n\n        if key not in grouped_data:\n            grouped_data[key] = {\n                'company': company,\n                'customer': customer,\n                'outstanding_amount': 0,\n                'base_grand_total': 0,\n                'total_advance': 0  # Initialize advance paid for grouping\n            }\n        \n        # Aggregate values\n        grouped_data[key]['outstanding_amount'] = grouped_data[key]['outstanding_amount'] + row['outstanding_amount']\n        grouped_data[key]['base_grand_total'] = grouped_data[key]['base_grand_total'] + row['base_grand_total']\n        grouped_data[key]['total_advance'] = grouped_data[key]['total_advance'] + row['total_advance']  # Aggregate total advance\n\n    # Prepare final data for grouped report\n    final_data = []\n    for key, values in grouped_data.items():\n        final_data.append({\n            'customer': values['customer'],\n            'status': 'Grouped',  # Status for grouped rows\n            'outstanding_amount': values['outstanding_amount'],\n            'base_grand_total': values['base_grand_total'],\n            'total_advance': values['total_advance'],  # Include total advance paid for grouped data\n            'company': values['company'],\n            'sales_order': '',  # No specific sales order for grouped data\n            'sales_invoice': ''  # No specific invoice for grouped data\n        })\n\n    data = final_data\n\n# Final data output for the report\ndata = columns, data\n",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Customer Payment Statement 2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Customer Payment Statement 2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": "frappe.query_reports[\"Payment Due Report 2\"] = {\n    \"filters\": [\n    \n        {\n            \"fieldname\": \"company\",\n            \"label\": __(\"Company\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Company\"\n        },\n         {\n            \"fieldname\": \"customer\",\n            \"label\": __(\"Customer\"),\n            \"fieldtype\": \"Link\",\n            \"options\": \"Customer\"\n        },\n        {\n            \"fieldname\": \"status\",\n            \"label\": __(\"Status\"),\n            \"fieldtype\": \"Select\",\n            \"options\": \"\\nUnpaid\\nPartly Paid\\nNot Invoiced\\nOverdue\"\n        },\n        {\n            \"fieldname\": \"group_by_customer\",\n            \"label\": __(\"Group By Customer\"),\n            \"fieldtype\": \"Check\"\n        }\n    ]\n};\n",
+  "json": null,
+  "letter_head": "Shree Hari Krishna Tourism",
+  "modified": "2024-10-15 12:28:09.431705",
+  "module": "Hari Krishna Tourism",
+  "name": "Payment Due Report 2",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Payment Due Report 2",
+  "report_script": "columns = [\n    {\n        \"label\": _(\"Customer Name\"),\n        \"fieldname\": \"customer\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Customer\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Status\"),\n        \"fieldname\": \"status\",\n        \"fieldtype\": \"Data\",\n        \"width\": 100\n    },\n       \n    {\n        \"label\": _(\"Outstanding Amount\"),\n        \"fieldname\": \"outstanding_amount\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Grand Total\"),\n        \"fieldname\": \"base_grand_total\",\n        \"fieldtype\": \"Currency\",\n        \"width\": 150\n    },\n\n    {\n        \"label\": _(\"Company\"),\n        \"fieldname\": \"company\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Company\",\n        \"width\": 250\n    },\n    {\n        \"label\": _(\"Sales Order Link\"),\n        \"fieldname\": \"sales_order\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Order\",\n        \"width\": 150\n    },\n    {\n        \"label\": _(\"Sales Invoice Link\"),\n        \"fieldname\": \"sales_invoice\",\n        \"fieldtype\": \"Link\",\n        \"options\": \"Sales Invoice\",\n        \"width\": 150\n    }\n]\n\ndata = []\n\nfilters = filters or {}\n\n# Initialize query filters for submitted Sales Orders and Invoices\nquery_conditions = ['so.docstatus = 1']  # Only include submitted Sales Orders\nquery_values = []\n\n# Apply additional filters based on user input\nif filters.get('company'):\n    query_conditions.append('so.company = %s')\n    query_values.append(filters.get('company'))\n\nif filters.get('customer'):\n    query_conditions.append('so.customer = %s')\n    query_values.append(filters.get('customer'))\n\n# Convert the list of conditions into a single string for the SQL query\nwhere_clause = ' AND '.join(query_conditions)\n\n# Fetch submitted Sales Orders and their related Sales Invoices\nsales_orders = frappe.db.sql(f\"\"\"\n    SELECT \n        so.name AS sales_order,\n        so.customer, \n        so.company,\n        si.name AS sales_invoice,\n        si.status, \n        si.outstanding_amount, \n        si.base_grand_total,\n        so.grand_total,\n        si.total_advance AS invoice_advance,  -- Fetch advance from Sales Invoice\n        so.advance_paid AS order_advance  -- Fetch advance from Sales Order\n        \n    FROM \n        `tabSales Order` so\n    LEFT JOIN \n        `tabSales Invoice Item` sii ON so.name = sii.sales_order\n    LEFT JOIN \n        `tabSales Invoice` si ON sii.parent = si.name AND si.docstatus = 1 AND si.outstanding_amount > 0  -- Only include submitted invoices\n    WHERE \n        {where_clause}\n    ORDER BY \n        so.name\n\"\"\", query_values, as_dict=True)\n\n# Append sales order and invoice data to the result set\nfor entry in sales_orders:\n    # Safely handle None values\n    \n    amount_grand_total = float(entry.get('grand_total', 0) or 0)  # Default to 0 if None\n    total_advance = float(entry.get('invoice_advance', 0) or 0) if entry.get('sales_invoice') else float(entry.get('order_advance', 0) or 0)  \n    amount_outstanding =  amount_grand_total- total_advance\n    status = entry['status'] if entry['sales_invoice'] else 'Not Invoiced'  # Status logic\n    \n    if filters.get('status') and filters.get('status') != status:\n        continue\n    \n        \n    data.append({\n        'customer': entry['customer'],\n        'sales_order': entry['sales_order'],\n        'sales_invoice': entry['sales_invoice'] if entry['sales_invoice'] else 'Not Invoiced',\n        'status': status,\n        'outstanding_amount': amount_outstanding,\n        'base_grand_total': amount_grand_total,\n        'company': entry['company']\n    })\n\n# Check if the user wants to group the results by customer\nif filters.get('group_by_customer'):\n    columns = [col for col in columns if col['fieldname'] not in ['sales_order', 'sales_invoice']]\n    grouped_data = {}\n    for row in data:\n        customer = row['customer']\n        company = row['company']\n        key = (customer, company)  # Create a unique key for grouping\n\n        if key not in grouped_data:\n            grouped_data[key] = {\n                'company': company,\n                'customer': customer,\n                'outstanding_amount': 0,\n                'base_grand_total': 0,\n                'total_advance': 0  # Initialize advance paid for grouping\n            }\n        \n        # Aggregate values\n        grouped_data[key]['outstanding_amount'] = grouped_data[key]['outstanding_amount'] + row['outstanding_amount']\n        grouped_data[key]['base_grand_total'] = grouped_data[key]['base_grand_total'] + row['base_grand_total']\n\n    # Prepare final data for grouped report\n    final_data = []\n    for key, values in grouped_data.items():\n        final_data.append({\n            'customer': values['customer'],\n            'status': 'Grouped',  # Status for grouped rows\n            'outstanding_amount': values['outstanding_amount'],\n            'base_grand_total': values['base_grand_total'],\n            'company': values['company'],\n            'sales_order': '',  # No specific sales order for grouped data\n            'sales_invoice': ''  # No specific invoice for grouped data\n        })\n\n    data = final_data\n\n# Final data output for the report\ndata = columns, data\n",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Payment Due Report 2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Payment Due Report 2",
     "parentfield": "roles",
     "parenttype": "Report",
     "role": "Accounts User"
