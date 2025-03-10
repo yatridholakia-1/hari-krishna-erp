@@ -15,10 +15,10 @@
   "doctype": "Client Script",
   "dt": "Quotation",
   "enabled": 1,
-  "modified": "2024-09-14 17:43:35.298269",
+  "modified": "2024-10-22 10:59:50.374475",
   "module": null,
   "name": "Fetch Details",
-  "script": "frappe.ui.form.on('Quotation', {\n\tparty_name(frm) {\n\t    cur_frm.add_fetch('party_name', 'custom_parent_customer', 'custom_parent_customer_group');\n\t}\n})",
+  "script": "frappe.ui.form.on('Quotation', {\n\tparty_name(frm) {\n\t    cur_frm.add_fetch('party_name', 'custom_parent_customer', 'custom_parent_customer_group');\n\t},\n\t\ttransaction_date(frm){\n\t    if(frm.doc.payment_schedule){\n\t        frm.clear_table('payment_schedule');\n            frm.refresh_field('payment_schedule');\n\t    }\n\t}\n})",
   "view": "Form"
  },
  {
@@ -59,10 +59,10 @@
   "doctype": "Client Script",
   "dt": "Sales Order",
   "enabled": 1,
-  "modified": "2024-09-14 18:24:27.136025",
+  "modified": "2024-10-22 10:59:04.198239",
   "module": null,
   "name": "Hide Button From Sales Order",
-  "script": "frappe.ui.form.on('Sales Order', {\n\trefresh(frm) {\n\t\t// your code here\n\t\tsetTimeout(() => {\n    \t\tfrm.remove_custom_button('Pick List', 'Create');\n    \t\tfrm.remove_custom_button('Material Request', 'Create');\n    \t\tfrm.remove_custom_button('Request for Raw Materials', 'Create');\n    \t\tfrm.remove_custom_button('Purchase Order', 'Create');\n    \t\tfrm.remove_custom_button('Project', 'Create');\n    \t\tfrm.remove_custom_button('Payment Request', 'Create');\n\t    },100)\n\t}\n})",
+  "script": "frappe.ui.form.on('Sales Order', {\n\trefresh(frm) {\n\t\t// your code here\n\t\tsetTimeout(() => {\n    \t\tfrm.remove_custom_button('Pick List', 'Create');\n    \t\tfrm.remove_custom_button('Material Request', 'Create');\n    \t\tfrm.remove_custom_button('Request for Raw Materials', 'Create');\n    \t\tfrm.remove_custom_button('Purchase Order', 'Create');\n    \t\tfrm.remove_custom_button('Project', 'Create');\n    \t\tfrm.remove_custom_button('Payment Request', 'Create');\n\t    },100)\n\t},\n\ttransaction_date(frm){\n\t    if(frm.doc.payment_schedule){\n\t        frm.clear_table('payment_schedule');\n            frm.refresh_field('payment_schedule');\n\t    }\n\t}\n})",
   "view": "Form"
  },
  {
@@ -70,10 +70,10 @@
   "doctype": "Client Script",
   "dt": "Sales Invoice",
   "enabled": 1,
-  "modified": "2024-09-14 18:33:07.521608",
+  "modified": "2024-10-22 10:56:06.117471",
   "module": null,
   "name": "Hide Button From Sales Invoice",
-  "script": "frappe.ui.form.on('Sales Invoice', {\n\trefresh(frm) {\n\t\t// your code here\n\t\tsetTimeout(() => {\n\t\t    frm.remove_custom_button('Fetch Timesheet')\n\t\t    frm.remove_custom_button('Accounting Ledger', 'View');\n\t\t    frm.remove_custom_button('Accounting Ledger', 'Preview');\n\t\t    frm.remove_custom_button('UnReconcile', 'Actions');\n\t\t    frm.remove_custom_button('Delivery Note', 'Get Items From');\n    \t\tfrm.remove_custom_button('Delivery', 'Create');\n    \t\tfrm.remove_custom_button('Quality Inspection(s)', 'Create');\n    \t\tfrm.remove_custom_button('Return / Credit Note', 'Create');\n    \t\tfrm.remove_custom_button('Invoice Discounting', 'Create');\n    \t\tfrm.remove_custom_button('Dunning', 'Create');\n    \t\tfrm.remove_custom_button('Maintenance Schedule', 'Create');\n    \t\tfrm.remove_custom_button('Payment Request', 'Create');\n\t    },130)\n\t}\n})",
+  "script": "frappe.ui.form.on('Sales Invoice', {\n\trefresh(frm) {\n\t\t// your code here\n\t\tsetTimeout(() => {\n\t\t    frm.remove_custom_button('Fetch Timesheet')\n\t\t    frm.remove_custom_button('Accounting Ledger', 'View');\n\t\t    frm.remove_custom_button('Accounting Ledger', 'Preview');\n\t\t    frm.remove_custom_button('UnReconcile', 'Actions');\n\t\t    frm.remove_custom_button('Delivery Note', 'Get Items From');\n    \t\tfrm.remove_custom_button('Delivery', 'Create');\n    \t\tfrm.remove_custom_button('Quality Inspection(s)', 'Create');\n    \t\tfrm.remove_custom_button('Return / Credit Note', 'Create');\n    \t\tfrm.remove_custom_button('Invoice Discounting', 'Create');\n    \t\tfrm.remove_custom_button('Dunning', 'Create');\n    \t\tfrm.remove_custom_button('Maintenance Schedule', 'Create');\n    \t\tfrm.remove_custom_button('Payment Request', 'Create');\n\t    },130)\n\t},\n\tposting_date(frm){\n\t    if(frm.doc.payment_schedule){\n\t        frm.clear_table('payment_schedule');\n            frm.refresh_field('payment_schedule');\n\t    }\n\t}\n})",
   "view": "Form"
  },
  {
